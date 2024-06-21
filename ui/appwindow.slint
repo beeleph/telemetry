@@ -1,0 +1,37 @@
+import { Button, VerticalBox } from "std-widgets.slint";
+
+export component AppWindow inherits Window {
+    in-out property<int> counter: 42;
+    in-out property<int> minutes: 0;
+    in-out property<int> seconds: 0;
+    in-out property<int> mills: 0;
+    in-out property<int> best_minutes: 0;
+    in-out property<int> best_seconds: 0;
+    in-out property<int> best_mills: 0;
+    in-out property<int> diff_minutes: 0;
+    in-out property<int> diff_seconds: 0;
+    in-out property<int> diff_mills: 0;
+    in-out property<int> diff_duration: 0;
+    in-out property<brush> diff_color: white;
+    callback request-increase-value();
+    VerticalBox {
+        Text {
+            text: "Best:      \{root.best_minutes}:\{root.best_seconds}:\{root.best_mills}";
+            color: orange;
+        }
+        Text {
+            text: "Diff last: \{root.best_minutes}:\{root.best_seconds}:\{root.best_mills}";
+            color: {diff_color};
+        }
+        Text {
+            text: "\{root.minutes}:\{root.seconds}:\{root.mills}";
+            font-size: 42px;
+        }
+        Button {
+            text: "Start\\Stop";
+            clicked => {
+                root.request-increase-value();
+            }
+        }
+    }
+}
